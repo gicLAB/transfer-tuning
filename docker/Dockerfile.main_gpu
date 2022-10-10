@@ -1,0 +1,26 @@
+FROM nvcr.io/nvidia/pytorch:21.09-py3
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update --fix-missing && \
+    apt-get -y install \
+    python3 \
+    ninja-build \
+    cmake \
+    build-essential \
+    llvm-dev \
+    git \
+    tmux \
+    python3-pip \
+    wget \
+    tree
+
+COPY requirements.txt ./
+RUN pip3 install -r requirements.txt
+RUN jupyter contrib nbextension install --user; jupyter nbextensions_configurator enable --user
+RUN pip3 install \
+    torch==1.10.0+cu113 \
+    torchvision==0.11.1+cu113 \
+    torchaudio==0.10.0+cu113 \
+    -f https://download.pytorch.org/whl/cu113/torch_stable.html
+
+RUN echo "export TVM_HOME=/tvm; export PYTHONPATH=\$TVM_HOME/python:\${PYTHONPATH}" > /root/.bashrc

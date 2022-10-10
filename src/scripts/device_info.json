@@ -1,0 +1,8 @@
+{
+    "xeon_cpu": {
+        "host_type": "local",
+        "target": "llvm -mtriple=x86_64-linux-gnu -mcpu=core-avx2",
+        "host": "llvm"
+    }
+
+}

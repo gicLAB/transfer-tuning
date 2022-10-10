@@ -1,0 +1,49 @@
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update --fix-missing && \
+    apt-get -y install \
+    python3 \
+    ninja-build \
+    cmake \
+    build-essential \
+    llvm-dev \
+    git \
+    tmux \
+    python3-pip \
+    wget \
+    tree
+
+RUN echo "Hello world"
+# COPY requirements.txt ./
+# RUN pip3 install -r requirements.txt
+# RUN jupyter contrib nbextension install --user; jupyter nbextensions_configurator enable --user
+RUN pip3 install attrs==21.4.0 \
+    decorator==5.1.1 \
+    iniconfig==1.1.1 \
+    numpy==1.22.3 \
+    onnx==1.11.0 \
+    packaging==21.3 \
+    pluggy==1.0.0 \
+    pandas==1.4.2 \
+    psutil \
+    pyparsing==3.0.8 \
+    pytest==7.1.1 \
+    scipy==1.8.0 \
+    tomli==2.0.1 \
+    tqdm==4.64.0 \
+    xgboost==1.4.2
+
+# RUN pip3 install setuptools==58.3.0
+# RUN pip3 install Cython
+# RUN pip3 install gdown
+# RUN gdown https://drive.google.com/uc?id=1y-X1UGC43xUfnycJcuDp7tlyFi8QHxvs
+# RUN pip3 install torch-1.10.0a0+git36449ea-cp37-cp37m-linux_aarch64.whl
+# RUN rm torch-1.10.0a0+git36449ea-cp37-cp37m-linux_aarch64.whl
+# RUN pip3 install \
+#     torch==1.10.0 \
+#     torchvision==0.11.1 \
+#     torchaudio==0.10.0 \
+#     -f https://download.pytorch.org/whl/cu113/torch_stable.html
+
+RUN echo "export TVM_HOME=/tvm; export PYTHONPATH=\$TVM_HOME/python:\${PYTHONPATH}" > /root/.bashrc

@@ -1,0 +1,52 @@
+FROM ubuntu:20.04
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Install libraries
+# ----------------------------------------------------------------------------------------------------------------------
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update --fix-missing && \
+    apt-get -y install \
+    build-essential \
+    cmake \
+    git \
+    llvm-dev \
+    ninja-build \
+    python3 \
+    python3-pip \
+    tmux \
+    tree \
+    wget
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Setup Python deps
+# ----------------------------------------------------------------------------------------------------------------------
+
+COPY requirements.txt ./
+RUN pip3 install -r requirements.txt
+RUN jupyter contrib nbextension install --user; jupyter nbextensions_configurator enable --user
+RUN pip3 install \
+    torch==1.10.0 \
+    torchvision==0.11.1 \
+    torchaudio==0.10.0 \
+    -f https://download.pytorch.org/whl/cu113/torch_stable.html
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Install TVM
+# ----------------------------------------------------------------------------------------------------------------------
+RUN cd / && \
+    git clone --branch v0.8 --recursive https://github.com/apache/tvm && \
+    cd tvm && \
+    git checkout 801c26dcae && \
+    mkdir build && \
+    cp cmake/config.cmake build && \
+    cd build && \
+    echo set\(USE_LLVM ON\) >> config.cmake && \
+    cmake .. -GNinja && \
+    ninja
+
+RUN echo "export TVM_HOME=/tvm; export PYTHONPATH=\$TVM_HOME/python:\${PYTHONPATH}" > /root/.bashrc
+
+WORKDIR /workspace
