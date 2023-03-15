@@ -12,10 +12,7 @@
   </p>
 </div>
 
-
-
-
-==============================
+------------
 
 Find the [arXiv version here](https://arxiv.org/abs/2201.05587), and the [ACM version here](https://dl.acm.org/doi/10.1145/3559009.3569682).
 
