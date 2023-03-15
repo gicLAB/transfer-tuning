@@ -1,7 +1,23 @@
-Transfer-Tuning: Reusing Auto-Schedules for Efficient Tensor Program Code Generation
+<br />
+<div align="center">
+    <img src="./docs/acm_available_1.1.png" alt="acm available" width="80" height="80">
+    <img src="./docs/artifacts_evaluated_reusable_v1_1.png" alt="acm evaluated and reusable" width="80" height="80">
+    <img src="./docs/results_reproduced_v1_1.png" alt="acm results reproduced" width="80" height="80">
+
+  <h3 align="center">Transfer-Tuning: Reusing Auto-Schedules for Efficient Tensor Program Code Generation</h3>
+
+  <p align="center">
+    Code artifact for our PACT 2022 paper.
+    <br />
+  </p>
+</div>
+
+
+
+
 ==============================
 
-Code artifact for our PACT 2022 paper.  Find the [arXiv version here](https://arxiv.org/abs/2201.05587).
+Find the [arXiv version here](https://arxiv.org/abs/2201.05587), and the [ACM version here](https://dl.acm.org/doi/10.1145/3559009.3569682).
 
 
 ```
